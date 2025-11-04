@@ -1,14 +1,43 @@
+import { useEffect, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import { ArrowRight } from 'lucide-react';
 
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+    );
+  } catch (_e) {
+    return false;
+  }
+}
+
 export default function Hero() {
+  const [showSpline, setShowSpline] = useState(false);
+
+  useEffect(() => {
+    // Only attempt to render Spline on the client and if WebGL is available
+    if (typeof window !== 'undefined' && isWebGLAvailable()) {
+      setShowSpline(true);
+    }
+  }, []);
+
   return (
     <section id="home" className="relative">
       <div className="relative h-[560px] w-full overflow-hidden">
-        <Spline
-          scene="https://prod.spline.design/8iKqfGQ6r4CkKp2T/scene.splinecode"
-          style={{ width: '100%', height: '100%' }}
-        />
+        {showSpline ? (
+          <Spline
+            scene="https://prod.spline.design/8iKqfGQ6r4CkKp2T/scene.splinecode"
+            style={{ width: '100%', height: '100%' }}
+          />
+        ) : (
+          // Graceful fallback background if WebGL/Spline can't render
+          <div
+            className="h-full w-full bg-[url('https://images.unsplash.com/photo-1695740633675-d060b607f5c4?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxjZXJhbWljJTIwcG90dGVyeSUyMGhhbmRtYWRlfGVufDB8MHx8fDE3NjIxNzI2NDR8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80')] bg-cover bg-center"
+            aria-hidden
+          />
+        )}
         {/* gradient overlay to make text legible; pointer-events-none so scene is interactive */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
       </div>
