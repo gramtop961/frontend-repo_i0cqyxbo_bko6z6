@@ -1,28 +1,51 @@
-import { useState } from 'react'
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import ProductGrid from './components/ProductGrid';
+import Footer from './components/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <section id="about" className="bg-neutral-50 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center">
+          <div className="overflow-hidden rounded-xl border border-neutral-200">
+            <img
+              src="https://images.unsplash.com/photo-1586861634116-008604b71e63?q=80&w=1640&auto=format&fit=crop"
+              alt="Artisan carving a sculpture"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">Rooted in Devotion, Crafted with Mastery</h2>
+            <p className="mt-3 text-neutral-700">
+              Vismayam Arts is dedicated to the timeless aesthetics of Indian temple sculpture. Our artisans follow
+              classical canons to create works that honor sacred narratives while fitting modern spaces—homes, galleries,
+              and institutions. Every piece is finished by hand and inspected for museum-grade quality.
+            </p>
+            <ul className="mt-6 grid grid-cols-1 gap-3 text-sm text-neutral-800 sm:grid-cols-2">
+              <li className="rounded-lg border border-neutral-200 bg-white px-4 py-3">• Traditional bronze, stone, and wood</li>
+              <li className="rounded-lg border border-neutral-200 bg-white px-4 py-3">• Bespoke commissions for homes & temples</li>
+              <li className="rounded-lg border border-neutral-200 bg-white px-4 py-3">• Ethical sourcing and mindful craftsmanship</li>
+              <li className="rounded-lg border border-neutral-200 bg-white px-4 py-3">• Worldwide insured shipping</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <div className="min-h-screen bg-white text-neutral-900">
+      <Navbar />
+      <main>
+        <Hero />
+        <ProductGrid />
+        <About />
+      </main>
+      <Footer />
+    </div>
+  );
+}
